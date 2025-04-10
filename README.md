@@ -38,6 +38,14 @@ A basic authentication module built with **Node.js** and **MongoDB**, providing 
 
 ---
 
+## .env
+.env file must be created at root directory of the project with the following params:
+- `PORT=3333`
+- `DB_URI=<mongo db connection uri>`
+- `ACCESS_TOKEN_SECRET=<alpha numeric string hash>`
+
+---
+
 ## 📮 Postman Collection
 
 Test all APIs using this Postman collection:  
