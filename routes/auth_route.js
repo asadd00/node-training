@@ -11,6 +11,6 @@ router.post("/auth/register", authController.registerUser);
 
 router.post("/auth/login", authController.login);
 
-router.post("/auth/validateToken", authController.validateToken, authController.validateApiToken);
+router.get("/auth/user-profile", authController.validateToken, authController.getUserProfile);
 
 export default router;
