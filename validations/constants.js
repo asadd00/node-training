@@ -1,0 +1,1 @@
+export const lettersOnly = /^[A-Za-z]+$/

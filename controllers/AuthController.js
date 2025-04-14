@@ -9,30 +9,30 @@ class AuthController {
             const params = req.body
             const {name, username, password, confirm_password} = params;
 
-            if(!name) {
-                respond(res, 400, false, "Name is empty");
-                return;
-            }
-            if(!username) {
-                respond(res, 400, false, "Username is empty");
-                return;
-            }
-            if(!password) {
-                respond(res, 400, false, "Password is empty");
-                return;
-            }
-            if(!confirm_password) {
-                respond(res, 400, false, "Confirm Password is empty");
-                return;
-            }
-            if(password.length < 6) {
-                respond(res, 400, false, "Password must contain atleast 6 characters");
-                return;
-            }
-            if(password != confirm_password){
-                respond(res, 400, false, "Passwords does not match");
-                return;
-            }
+            // if(!name) {
+            //     respond(res, 400, false, "Name is empty");
+            //     return;
+            // }
+            // if(!username) {
+            //     respond(res, 400, false, "Username is empty");
+            //     return;
+            // }
+            // if(!password) {
+            //     respond(res, 400, false, "Password is empty");
+            //     return;
+            // }
+            // if(!confirm_password) {
+            //     respond(res, 400, false, "Confirm Password is empty");
+            //     return;
+            // }
+            // if(password.length < 6) {
+            //     respond(res, 400, false, "Password must contain atleast 6 characters");
+            //     return;
+            // }
+            // if(password != confirm_password){
+            //     respond(res, 400, false, "Passwords does not match");
+            //     return;
+            // }
 
             const userWithThisUsername = await userService.getUserByUsername(username);
             if(userWithThisUsername){
