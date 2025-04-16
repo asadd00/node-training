@@ -1,5 +1,12 @@
-export function respond(response, statusCode, status, message, errors, data = {}) {
+export function respond(response, statusCode, status, message, data = {}) {
     response
         .status(statusCode)
-        .json({ status: status, message: message, errors, data: data });
+        .json({ success: status, message: message, data: data });
 }
+
+export const createError = (statusCode, message, errors = []) => {
+    const err = new Error(message);
+    err.statusCode = statusCode;
+    err.cause = errors;
+    return err;
+  };

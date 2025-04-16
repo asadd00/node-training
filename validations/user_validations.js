@@ -14,3 +14,7 @@ export const createUserSchema = Joi.object ({
         'any.only': 'Confirm password must match password',
     }),
 });
+
+export const loginUserSchema = Joi.object ({
+    ...baseUserSchema
+});

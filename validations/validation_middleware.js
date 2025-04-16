@@ -1,4 +1,5 @@
 import { respond } from "../utils/methods.js";
+import { createError } from '../utils/methods.js';
 
 export const validateRequest = (schema, property = 'body') => {
     return (req, res, next) => {
@@ -22,6 +23,6 @@ export const validateRequest = (schema, property = 'body') => {
 
         const err = error.details.map((e) => e.message)
 
-        respond(res, 500, false, err);
+        throw createError(500, "Valiation error", err);
     }
 }
