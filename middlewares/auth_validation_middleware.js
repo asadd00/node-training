@@ -15,7 +15,7 @@ export const validateToken = (req, res, next) => {
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, payload) => {
         if (err) {
-            throw createError(401, "Invalid token");
+            next(createError(401, "Token has expired"));
         }
         else {
             try {
@@ -42,7 +42,6 @@ export const validateToken = (req, res, next) => {
                     }
                 }
             } catch (error) {
-                console.log(error);
                 next(error);
             }
         }

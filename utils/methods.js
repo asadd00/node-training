@@ -1,7 +1,7 @@
-export function respond(response, statusCode, status, message, data = {}) {
+export function respond(response, statusCode, success, message, data = {}) {
     response
         .status(statusCode)
-        .json({ success: status, message: message, data: data });
+        .json({ success: success, message: message, data: data });
 }
 
 export const createError = (statusCode, message, errors = []) => {
