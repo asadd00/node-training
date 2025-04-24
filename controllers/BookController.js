@@ -57,6 +57,31 @@ class BookController {
             next(error);
         }
     }
+
+    async addReplyToComment(req, res, next) {
+        try {
+            const {comment_id, reply} = req.body;
+            const result = await bookService.addReplyToComment(req.user._id, comment_id, reply)
+            respond(res, 200, "Replied to the comment", result);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async deleteReplyOnComment(req, res, next) {
+        try {
+            const {comment_id, reply_id} = req.body;
+            const result = await bookService.deleteReplyOnComment(req.user._id, comment_id, reply_id)
+            if(result.modifiedCount){
+                respond(res, 200, "Reply deleted");
+            }
+            else {
+                throw createError(400, 'Error unknown', result)
+            }
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default new BookController();

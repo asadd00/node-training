@@ -13,3 +13,13 @@ export const addCommentToBookSchema = Joi.object({
 export const deleteCommentOnBookSchema = Joi.object({
     comment_id: Joi.string().required()
 });
+
+export const replyOnCommentSchema = Joi.object({
+    comment_id: Joi.string().required(),
+    reply: Joi.string().required()
+});
+
+export const deleteReplyOnCommentSchema = Joi.object({
+    comment_id: Joi.string().required(),
+    reply_id: Joi.string().required()
+});

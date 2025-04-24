@@ -52,6 +52,7 @@ class BookService {
                                 in: {
                                     _id: "$$com._id",
                                     comment: "$$com.comment",
+                                    replies: "$$com.replies",
                                     user: {
                                         $arrayElemAt: [
                                             {
@@ -105,6 +106,47 @@ class BookService {
             _id: new ObjectId(comment_id), 
             user_id: user_id
         });
+
+        return result;
+    }
+
+    async addReplyToComment(user_id, comment_id, reply) {
+        const db = await connectDB();
+
+        const replyObj = {
+            _id: new ObjectId(),
+            text: reply,
+            user_id: user_id
+        };
+
+        const result = await db.collection(this.commentCollection).updateOne(
+            {
+                _id: new ObjectId(comment_id)
+            },
+            {
+                $push: {
+                    replies: replyObj
+                }
+            }
+        )
+
+        return result;
+    }
+
+    async deleteReplyOnComment(user_id, comment_id, reply_id) {
+        const db = await connectDB();
+        const result = await db.collection(this.commentCollection).updateOne(
+            {
+                _id: new ObjectId(comment_id),
+            },
+            {
+                $pull: {
+                    replies: {
+                        _id: new ObjectId(reply_id)
+                    }
+                }
+            }
+        );
 
         return result;
     }
