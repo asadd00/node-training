@@ -12,6 +12,8 @@ router.get('/auth/test', (req, res) => {
 
 router.post("/auth/register", validateRequest(createUserSchema), authController.registerUser);
 
+router.post("/auth/admin/register", validateRequest(createUserSchema), authController.registerUser);
+
 router.post("/auth/login", validateRequest(loginUserSchema), authController.login);
 
 router.get("/auth/user-profile", validateToken, authController.getUserProfile);

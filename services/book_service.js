@@ -104,7 +104,7 @@ class BookService {
         const db = await connectDB();
         const result = db.collection(this.commentCollection).deleteOne({
             _id: new ObjectId(comment_id), 
-            user_id: user_id
+            // user_id: user_id
         });
 
         return result;

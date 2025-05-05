@@ -1,4 +1,5 @@
 import bookService from "../services/book_service.js";
+import { user_role_admin } from "../utils/constants.js";
 import { createError, respond } from "../utils/methods.js";
 
 class BookController {
@@ -46,12 +47,17 @@ class BookController {
 
     async deleteCommentOnBook(req, res, next) {
         try {
-            const result = await bookService.deleteCommentOnBook(req.user._id, req.body.comment_id);
-            if(result.deletedCount){
-                respond(res, 200, true, 'Comment deleted');
+            if(req.user.role == user_role_admin){
+                const result = await bookService.deleteCommentOnBook(req.user._id, req.body.comment_id);
+                if(result.deletedCount){
+                    respond(res, 200, true, 'Comment deleted');
+                }
+                else {
+                    throw createError(400, 'Error unknown')
+                }
             }
             else {
-                throw createError(400, 'Error unknown')
+                throw createError(400, 'Only admin has rights to delete a comment, please contant the admin.')
             }
         } catch (error) {
             next(error);

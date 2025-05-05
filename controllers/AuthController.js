@@ -2,6 +2,7 @@ import { respond, createError } from '../utils/methods.js'
 import userService from '../services/user_service.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import {user_role_admin, user_role_user} from '../utils/constants.js'
 
 class AuthController {
     registerUser = async (req, res, next) => {
@@ -16,6 +17,7 @@ class AuthController {
 
             delete params['confirm_password'];
             params['password'] = await bcrypt.hash(password, 10);
+            params['role'] = req.route.path.includes('admin') ? user_role_admin : user_role_user;
             const user = await userService.registerUser(params);
 
             if(user){
